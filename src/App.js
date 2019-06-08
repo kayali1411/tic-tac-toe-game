@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react';
+import currentPlayerReducer from './Reducers/currentPlayer';
+import playerMovesReducer from './Reducers/playerMoves';
+import blocksReducer from './Reducers/blocks';
 
-function App() {
+import GameContext from './game-context';
+import Game from './Components/Game';
+
+
+const App = () => {
+  const currentPlayerInitialState = '';
+  const playerMovesInitialState   = { playerOne: '', playerTwo: '' };
+  const blocksInitialState        = { A: '', B: '', C: '', D: '', E: '', F: '', G: '', H: '', I: '' };
+
+  const [ currentPlayer, currentPlayerDispatcher ] = useReducer(currentPlayerReducer, currentPlayerInitialState);
+  const [ playerMoves, playerMovesDispatcher ]     = useReducer(playerMovesReducer, playerMovesInitialState);
+  const [ blocks, blocksDispatcher]                = useReducer(blocksReducer, blocksInitialState);
+
+  const store = {
+    currentPlayer,
+    currentPlayerDispatcher,
+    playerMoves,
+    playerMovesDispatcher,
+    blocks,
+    blocksDispatcher
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <GameContext.Provider value={store}>
+        <Game />
+      </GameContext.Provider>
   );
 }
 
