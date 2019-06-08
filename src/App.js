@@ -14,7 +14,7 @@ const App = () => {
 
   const [ currentPlayer, currentPlayerDispatcher ] = useReducer(currentPlayerReducer, currentPlayerInitialState);
   const [ playerMoves, playerMovesDispatcher ]     = useReducer(playerMovesReducer, playerMovesInitialState);
-  const [ blocks, blocksDispatcher]                = useReducer(blocksReducer, blocksInitialState);
+  const [ blocks, blocksDispatcher ]               = useReducer(blocksReducer, blocksInitialState);
 
   const store = {
     currentPlayer,
