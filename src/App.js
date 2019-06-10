@@ -8,7 +8,7 @@ import Game from './Components/Game';
 
 
 const App = () => {
-  const currentPlayerInitialState = '';
+  const currentPlayerInitialState = 'playerOne';
   const playerMovesInitialState   = { playerOne: '', playerTwo: '' };
   const blocksInitialState        = { A: '', B: '', C: '', D: '', E: '', F: '', G: '', H: '', I: '' };
 
