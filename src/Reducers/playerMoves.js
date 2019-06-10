@@ -3,8 +3,13 @@ const currentPlayerReducer = (state, action) => {
         case 'ADD_PLAYER_MOVES':
             return {
                 ...state,
-                ...action.playerMoves
+                [action.player]: action.moves
             };
+        case 'REST_PLAYER_MOVES':
+            return {
+                playerOne: '',
+                playerTwo: ''
+            }
         default:
             return state;
     }

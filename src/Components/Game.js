@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import GameContext from '../game-context';
 import Blocks from './Blocks';
-// import Control from './Control';
-// import Result from './Result';
-
+import Control from './Control';
 
 const Game = () => {
 
@@ -21,15 +19,14 @@ const Game = () => {
     useEffect(() => {
         const prePlayer = currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne';
         checkWinner(prePlayer);
-    });
+    }, [currentPlayer]);
 
     return (
         <>
             <h1>{currentPlayer}</h1>
             <h2>{winner}</h2>
             <Blocks />
-            {/*<Control />*/}
-            {/*<Result />*/}
+            <Control />
         </>
     );
 }

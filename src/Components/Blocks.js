@@ -1,32 +1,55 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import GameContext from '../game-context';
 
 const Blocks = () => {
     const { currentPlayer, currentPlayerDispatcher, playerMoves, playerMovesDispatcher } = useContext(GameContext);
-    const [ blocks, setBlocks ] = useState({ A:'', B:'', C:'', D:'', E:'', F:'', G:'', H:'', I:'' })
+
+    const [ blocks, setBlocks ] = useState({ A:'', B:'', C:'', D:'', E:'', F:'', G:'', H:'', I:'' });
+    const [ error, setError ]   = useState('');
 
     const squares = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
     const handlePlayerMove = (e) => {
-        const nxtPlayer = currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne';
-        const move = currentPlayer === 'playerOne' ? 'X' : 'O';
+        if(!!currentPlayer) {
+            const nxtPlayer = currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne';
+            const move = currentPlayer === 'playerOne' ? 'X' : 'O';
 
-        playerMovesDispatcher({ type: 'ADD_PLAYER_MOVES',  playerMoves: { [currentPlayer]: playerMoves[currentPlayer].concat(e.target.id) }});
-        currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: nxtPlayer });
-        setBlocks({
-            ...blocks,
-            [e.target.id]: move
-        });
+            playerMovesDispatcher({
+                type: 'ADD_PLAYER_MOVES',
+                player: currentPlayer,
+                moves: playerMoves[currentPlayer].concat(e.target.id)
+            });
 
+            currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: nxtPlayer });
+
+            setBlocks({
+                ...blocks,
+                [e.target.id]: move
+            });
+
+            setError('');
+        } else {
+            setError('Alert: Please click on start game button!');
+        }
     };
+
+    useEffect(() => {
+        if(currentPlayer === '') {
+            setBlocks({ A:'', B:'', C:'', D:'', E:'', F:'', G:'', H:'', I:'' });
+        }
+        setError('');
+    }, [currentPlayer]);
 
     return (
         <>
-            {squares.map((square) => (
-                <div key={square}>
-                    <button id={square} onClick={handlePlayerMove}>Value: {blocks[square]}</button>
-                </div>
-            ))}
+            <h1>{error}</h1>
+            <div>
+                {squares.map((square) => (
+                    <div key={square}>
+                        <button id={square} onClick={handlePlayerMove} disabled={!!blocks[square]}>Value: {blocks[square]}</button>
+                    </div>
+                ))}
+            </div>
         </>
     );
 };
