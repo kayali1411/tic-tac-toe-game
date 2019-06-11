@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Modal from 'react-modal';
 import GameContext from '../game-context';
 import Blocks from './Blocks';
 import Control from './Control';
 
 const Game = () => {
 
-    const { currentPlayer, playerMoves } = useContext(GameContext);
+    const { currentPlayer, currentPlayerDispatcher, playerMoves, playerMovesDispatcher } = useContext(GameContext);
     const [ result, setResult ] = useState({ endGame: '', winner: '', player: '' });
 
 
@@ -30,6 +31,16 @@ const Game = () => {
         }
     };
 
+    const handleModalClose = () => {
+        currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: '' });
+        playerMovesDispatcher({ type: 'REST_PLAYER_MOVES' });
+        setResult({
+            endGame: '',
+            winner: '',
+            player: ''
+        });
+    };
+
     useEffect(() => {
         if(!!currentPlayer) {
             const prePlayer = currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne';
@@ -39,12 +50,21 @@ const Game = () => {
         }
     }, [currentPlayer]);
 
+    Modal.setAppElement(document.getElementById('root'));
+
     return (
         <>
             <h1>{currentPlayer}</h1>
-            <h2>{result.endGame && result.player}</h2>
             <Blocks />
             <Control />
+            <Modal
+                isOpen={!!result.endGame}
+                onRequestClose={handleModalClose}
+            >
+                { result.winner && <h2>Winner: {result.player}</h2> }
+                { !result.winner && <h2>Draw</h2> }
+                <p onClick={handleModalClose}>Close</p>
+            </Modal>
         </>
     );
 }
