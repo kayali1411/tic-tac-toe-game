@@ -11,23 +11,20 @@ const Game = () => {
 
 
     const checkWinner = (player) => {
-        const winnerCode = ['ABC', 'DEF', 'GHI', 'ADG', 'BEH', 'CFI', 'AEI', 'CEG'];
-        const isWinner = winnerCode.includes(playerMoves[player]);
+        if(playerMoves[player].length > 2) {
+            const winnerCode = ['ABC', 'DEF', 'GHI', 'ADG', 'BEH', 'CFI', 'AEI', 'CEG'];
+            const isWinner = winnerCode.find((code) => {
+                let str1 = code.split('').sort().join('');
+                let str2 = playerMoves[player].split('').sort().join('');
 
-        if(isWinner) {
-            setResult({
-                endGame: true,
-                winner: true,
-                player
+                return str1 === str2;
             });
-        }
-
-        if((playerMoves.playerOne.length + playerMoves.playerTwo.length) === 9) {
-            setResult({
-                endGame: true,
-                winner: false,
-                player: 'Draw'
-            });
+            if(isWinner) {
+                return setResult({ endGame: true, winner: true, player });
+            }
+            if((playerMoves.playerOne.length + playerMoves.playerTwo.length) === 9) {
+                return setResult({ endGame: true, winner: false, player: 'Draw' });
+            }
         }
     };
 
