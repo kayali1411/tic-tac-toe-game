@@ -1,0 +1,30 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 960px;
+  margin: 0 auto;
+  border: 4px solid #333;
+  border-radius: 5px;
+}
+
+.column {
+  flex: 0 0 33.33333333%;
+  height: 150px;
+}
+
+.game-block {
+  width: 100%;
+  height: 100%;
+  border: 4px solid #333;
+  padding: 10px;
+  background-color: #EAEAEA;
+  font-size: 75px;
+  font-weight: bold;
+  color: #000;
+  line-height: 1;
+}
+
+.column:nth-child(2n) .game-block {
+  background-color: #5F9EA0 !important;
+}

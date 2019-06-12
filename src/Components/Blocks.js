@@ -42,11 +42,11 @@ const Blocks = () => {
 
     return (
         <>
-            <h1>{error}</h1>
-            <div>
+            {!!error && <h1>{error}</h1>}
+            <div className="game-blocks row">
                 {squares.map((square) => (
-                    <div key={square}>
-                        <button id={square} onClick={handlePlayerMove} disabled={!!blocks[square]}>Value: {blocks[square]}</button>
+                    <div className="column" key={square}>
+                        <button className="game-block" id={square} onClick={handlePlayerMove} disabled={!!blocks[square]}>{blocks[square]}</button>
                     </div>
                 ))}
             </div>
