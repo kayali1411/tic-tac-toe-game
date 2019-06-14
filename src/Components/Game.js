@@ -51,9 +51,11 @@ const Game = () => {
 
     return (
         <>
-            <h1>{currentPlayer}</h1>
-            <Blocks />
-            <Control />
+            {/*<h1>{currentPlayer}</h1>*/}
+            <div id="game">
+                <Blocks />
+                <Control />
+            </div>
             <Modal
                 isOpen={!!result.endGame}
                 onRequestClose={handleModalClose}

@@ -1,6 +1,8 @@
 @import-normalize;
 
-@import "style/Blocks";
+@import "style/game";
+@import "style/blocks";
+@import "style/control";
 
 body {
   margin: 0;

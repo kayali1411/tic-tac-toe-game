@@ -1,0 +1,32 @@
+.control {
+  flex: 0 0 22%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(51, 51, 51, 0.9);
+}
+
+.control-button {
+  margin: 15px 30px;
+  color: #EFEFEF;
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all ease-out 300ms;
+}
+
+.control-button.start {
+  background-color: #F44336;
+  border-bottom: 4px solid #A91409;
+}
+
+.control-button.rest {
+  background-color: #00796B;
+  border-bottom: 4px solid #004840;
+}
+
+.disabled {
+  opacity: 0.6;
+}

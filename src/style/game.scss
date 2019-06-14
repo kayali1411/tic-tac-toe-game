@@ -1,0 +1,22 @@
+#game {
+  display: flex;
+  justify-content: space-between;
+}
+
+#root {
+  padding: 100px;
+}
+
+body {
+  background-image: url("./images/bk_img.png");
+}
+
+.box-shadow {
+  -webkit-box-shadow: 0 5px 7px 0 rgba(0,0,0,0.75);
+  -moz-box-shadow: 0 5px 7px 0 rgba(0,0,0,0.75);
+  box-shadow: 0 5px 7px 0 rgba(0,0,0,0.75);
+}
+
+button:focus {
+  outline: none !important;
+}

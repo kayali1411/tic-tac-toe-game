@@ -41,16 +41,16 @@ const Blocks = () => {
     }, [currentPlayer]);
 
     return (
-        <>
-            {!!error && <h1>{error}</h1>}
-            <div className="game-blocks row">
+        <div className="container">
+            {!!error && <h1 className="error-msg">{error}</h1>}
+            <div id="game-blocks" className="box-shadow">
                 {squares.map((square) => (
-                    <div className="column" key={square}>
-                        <button className="game-block" id={square} onClick={handlePlayerMove} disabled={!!blocks[square]}>{blocks[square]}</button>
+                    <div className="block" key={square}>
+                        <button className="square" id={square} onClick={handlePlayerMove} disabled={!!blocks[square]}>{blocks[square]}</button>
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 
