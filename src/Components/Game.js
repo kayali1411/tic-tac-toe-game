@@ -10,14 +10,13 @@ const Game = () => {
     const [ result, setResult ] = useState({ endGame: '', winner: '', player: '' });
 
 
-    const checkWinner = (player) => {
+    const findWinner = (player) => {
         if(playerMoves[player].length > 2) {
             const winnerCode = ['ABC', 'DEF', 'GHI', 'ADG', 'BEH', 'CFI', 'AEI', 'CEG'];
             const isWinner = winnerCode.find((code) => {
                 let str1 = code.split('').sort().join('');
                 let str2 = playerMoves[player].split('').sort().join('');
-
-                return str1 === str2;
+                return str2.includes(str1);
             });
             if(isWinner) {
                 return setResult({ endGame: true, winner: true, player });
@@ -41,7 +40,7 @@ const Game = () => {
     useEffect(() => {
         if(!!currentPlayer) {
             const prePlayer = currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne';
-            checkWinner(prePlayer);
+            findWinner(prePlayer);
         } else {
             setResult({ endGame: '', winner: '', player: '' });
         }
