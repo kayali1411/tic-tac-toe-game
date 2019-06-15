@@ -14,9 +14,10 @@ const Game = () => {
         if(playerMoves[player].length > 2) {
             const winnerCode = ['ABC', 'DEF', 'GHI', 'ADG', 'BEH', 'CFI', 'AEI', 'CEG'];
             const isWinner = winnerCode.find((code) => {
-                let str1 = code.split('').sort().join('');
-                let str2 = playerMoves[player].split('').sort().join('');
-                return str2.includes(str1);
+                let str1 = code.split('').sort();
+                let str2 = playerMoves[player].split('').sort();
+                let res  =  str1.filter((value) => str2.includes(value));
+                return res.length === 3;
             });
             if(isWinner) {
                 return setResult({ endGame: true, winner: true, player });
