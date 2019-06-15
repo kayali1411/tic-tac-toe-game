@@ -28,6 +28,8 @@ const Game = () => {
     };
 
     const handleModalClose = () => {
+        document.querySelector('.start').classList.toggle('disabled');
+        document.querySelector('.rest').classList.toggle('disabled');
         currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: '' });
         playerMovesDispatcher({ type: 'REST_PLAYER_MOVES' });
         setResult({
