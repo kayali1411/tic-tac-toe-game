@@ -63,7 +63,7 @@ const Game = () => {
             >
                 { result.winner && <h2>Winner: {result.player}</h2> }
                 { !result.winner && <h2>Draw</h2> }
-                <p onClick={handleModalClose}>Close</p>
+                <p onClick={handleModalClose} className="close-event">Close</p>
             </Modal>
         </>
     );
