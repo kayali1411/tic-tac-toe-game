@@ -42,7 +42,8 @@ const Blocks = () => {
 
     return (
         <div className="container">
-            {!!error && <h1 className="error-msg">{error}</h1>}
+            {!!error && <h1 className="msg error-msg">{error}</h1>}
+            {!!currentPlayer && <h1 className="msg info-msg">Current Player: {currentPlayer}</h1>}
             <div id="game-blocks" className="box-shadow">
                 {squares.map((square) => (
                     <div className="block" key={square}>

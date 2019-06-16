@@ -22,6 +22,10 @@ const Control = () => {
         <div className="control box-shadow">
             <button className="control-button start box-shadow" onClick={startGame}>Start Game</button>
             <button className="control-button rest box-shadow disabled" onClick={restartGame}>Restart Game</button>
+            <div>
+                <h3 className="text">PlayerOne : X</h3>
+                <h3 className="text">PlayerTwo : O</h3>
+            </div>
         </div>
     );
 };
