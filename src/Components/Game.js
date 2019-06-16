@@ -6,7 +6,7 @@ import Control from './Control';
 
 const Game = () => {
 
-    const { currentPlayer, currentPlayerDispatcher, playerMoves, playerMovesDispatcher } = useContext(GameContext);
+    const { currentPlayer, currentPlayerDispatcher, playerMoves, playerMovesDispatcher, mode } = useContext(GameContext);
     const [ result, setResult ] = useState({ endGame: '', winner: '', player: '' });
 
 
@@ -62,7 +62,7 @@ const Game = () => {
                 isOpen={!!result.endGame}
                 onRequestClose={handleModalClose}
             >
-                { result.winner && <h2>Winner: {result.player}</h2> }
+                { result.winner && <h2>Winner: {(result.player === 'playerTwo' && mode === 'single-mode') ? 'Bot' : result.player}</h2> }
                 { !result.winner && <h2>Draw</h2> }
                 <p onClick={handleModalClose} className="close-event">Close</p>
             </Modal>

@@ -9,12 +9,22 @@ import Game from './Components/Game';
 
 const App = () => {
   const currentPlayerInitialState = '';
-  const playerMovesInitialState   = { playerOne: '', playerTwo: '' };
+  const playModeInitialState = 'multi-player';
+  const playerMovesInitialState   = { playerOne: '', playerTwo: '', bot: '' };
   const blocksInitialState        = { A: '', B: '', C: '', D: '', E: '', F: '', G: '', H: '', I: '' };
 
   const [ currentPlayer, currentPlayerDispatcher ] = useReducer(currentPlayerReducer, currentPlayerInitialState);
   const [ playerMoves, playerMovesDispatcher ]     = useReducer(playerMovesReducer, playerMovesInitialState);
   const [ blocks, blocksDispatcher ]               = useReducer(blocksReducer, blocksInitialState);
+
+  const [ mode, modeDispatcher ] = useReducer((state, action) => {
+    switch (action.type) {
+      case 'SET_MODE':
+        return action.mode;
+      default:
+        return state;
+    }
+  }, playModeInitialState);
 
   const store = {
     currentPlayer,
@@ -22,7 +32,9 @@ const App = () => {
     playerMoves,
     playerMovesDispatcher,
     blocks,
-    blocksDispatcher
+    blocksDispatcher,
+    mode,
+    modeDispatcher
   };
 
   return (
