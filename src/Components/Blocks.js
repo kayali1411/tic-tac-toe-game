@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import GameContext from '../game-context';
 
+import Bot from '../bot';
+
 const Blocks = () => {
     const { currentPlayer, currentPlayerDispatcher, playerMoves, playerMovesDispatcher, mode } = useContext(GameContext);
 
@@ -8,6 +10,8 @@ const Blocks = () => {
     const [ error, setError ]   = useState('');
 
     const squares = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+
+    let bot = new Bot();
 
     const handlePlayerMove = (e) => {
         if(!!currentPlayer) {
@@ -33,14 +37,21 @@ const Blocks = () => {
         }
     };
 
-    const handleBotMove = () => {};
+    const handleBotMove = () => {
+        bot.updateAvailableMoves(playerMoves);
+        bot.blockPlayer(playerMoves.playerOne);
+        bot.findMove(playerMoves.playerTwo);
+        playerMovesDispatcher({ type: 'ADD_PLAYER_MOVES', player: 'playerTwo', moves: playerMoves.playerTwo.concat(bot.getNxtMove()) });
+        setBlocks({ ...blocks, [bot.getNxtMove()]: 'O' });
+        currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: 'playerOne' });
+    };
 
     useEffect(() => {
         if(currentPlayer === '') {
             setBlocks({ A:'', B:'', C:'', D:'', E:'', F:'', G:'', H:'', I:'' });
         }
         if(currentPlayer === 'playerTwo' && mode === 'single-mode') {
-            handleBotMove();
+            setTimeout(handleBotMove, 100);
         }
         setError('');
     }, [currentPlayer]);

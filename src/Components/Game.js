@@ -16,7 +16,7 @@ const Game = () => {
             const isWinner = winnerCode.find((code) => {
                 let str1 = code.split('').sort();
                 let str2 = playerMoves[player].split('').sort();
-                let res  =  str1.filter((value) => str2.includes(value));
+                let res  = str1.filter((value) => str2.includes(value));
                 return res.length === 3;
             });
             if(isWinner) {
