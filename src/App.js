@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import currentPlayerReducer from './Reducers/currentPlayer';
 import playerMovesReducer from './Reducers/playerMoves';
 import blocksReducer from './Reducers/blocks';
+import playeModeReducer from './Reducers/playeMode';
 
 import GameContext from './game-context';
 import Game from './Components/Game';
@@ -16,15 +17,7 @@ const App = () => {
   const [ currentPlayer, currentPlayerDispatcher ] = useReducer(currentPlayerReducer, currentPlayerInitialState);
   const [ playerMoves, playerMovesDispatcher ]     = useReducer(playerMovesReducer, playerMovesInitialState);
   const [ blocks, blocksDispatcher ]               = useReducer(blocksReducer, blocksInitialState);
-
-  const [ mode, modeDispatcher ] = useReducer((state, action) => {
-    switch (action.type) {
-      case 'SET_MODE':
-        return action.mode;
-      default:
-        return state;
-    }
-  }, playModeInitialState);
+  const [ mode, modeDispatcher ]                   = useReducer(playeModeReducer, playModeInitialState);
 
   const store = {
     currentPlayer,

@@ -7,6 +7,7 @@ const Control = () => {
     const startGame = () => {
         currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: 'playerOne' });
         document.querySelector('.start').classList.toggle('disabled');
+        document.querySelector('.mode').classList.add('disabled');
         document.querySelector('.rest').classList.toggle('disabled');
 
     };
@@ -14,11 +15,14 @@ const Control = () => {
     const restartGame = () => {
         currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: '' });
         playerMovesDispatcher({ type: 'REST_PLAYER_MOVES' });
+        modeDispatcher({ type: 'SET_MODE', mode: 'multi-player' });
         document.querySelector('.start').classList.toggle('disabled');
+        document.querySelector('.mode').classList.toggle('disabled');
         document.querySelector('.rest').classList.toggle('disabled');
     };
 
     const setMode = () => {
+        document.querySelector('.mode').classList.add('disabled');
         modeDispatcher({ type: 'SET_MODE', mode: 'single-mode' });
     }
 

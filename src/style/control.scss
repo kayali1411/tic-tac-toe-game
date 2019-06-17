@@ -27,6 +27,15 @@
   border-bottom: 4px solid #004840;
 }
 
+.control-button.mode {
+  background-color: #5F9EA0;
+  border-bottom: 4px solid #2C6B6D;
+}
+
+.control-button.disabled {
+  pointer-events: none;
+}
+
 .disabled {
   opacity: 0.6;
 }
