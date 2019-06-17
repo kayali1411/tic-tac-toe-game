@@ -3,6 +3,7 @@ class Bot {
         this.winnerCode = ['ABC', 'DEF', 'GHI', 'ADG', 'BEH', 'CFI', 'AEI', 'CEG'];
         this.moves = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
         this.move = null;
+        this.endGame = null;
     };
 
     getRandomMove() {
@@ -46,6 +47,14 @@ class Bot {
     updateAvailableMoves(moves) {
         this.move = null;
         this.moves = this.moves.filter((move) => !moves.playerOne.includes(move) && !moves.playerTwo.includes(move));
+
+        this.endGame = !!this.winnerCode.find((code) => {
+            let str1 = code.split('').sort();
+            let str2 = moves.playerOne.split('').sort();
+            let res  = str1.filter((value) => str2.includes(value));
+            return res.length === 3;
+        });
+
         this.winnerCode = this.winnerCode.filter((code) => {
             let str1 = code.split('').sort();
             let str2 = moves.playerOne.split('').sort();
@@ -55,10 +64,8 @@ class Bot {
             if((res1.length === 2 || res2.length === 2) && (res1.length + res2.length !== 3)) {
                 return true;
             }
-
             return !(res1.length + res2.length >= 2);
         });
-        console.log(this.winnerCode, this.moves);
     };
     
     setNxtMove(move) {
@@ -74,6 +81,10 @@ class Bot {
         const moves = this.moves.filter((move) => ['A', 'C', 'E', 'G', 'I'].includes(move))
         return this.setNxtMove(moves[Math.floor(Math.random() * moves.length)]);
     };
+
+    loser() {
+        return this.endGame;
+    }
 }
 
 export default Bot;

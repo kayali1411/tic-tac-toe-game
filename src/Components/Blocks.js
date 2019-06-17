@@ -39,13 +39,15 @@ const Blocks = () => {
 
     const handleBotMove = () => {
         bot.updateAvailableMoves(playerMoves);
-        bot.findMove(playerMoves.playerTwo);
-        bot.blockPlayer(playerMoves.playerOne);
-        const move = bot.getNxtMove();
-        if(move) {
-            playerMovesDispatcher({ type: 'ADD_PLAYER_MOVES', player: 'playerTwo', moves: playerMoves.playerTwo.concat(move) });
-            setBlocks({ ...blocks, [move]: 'O' });
-            currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: 'playerOne' });
+        if(!bot.loser()) {
+            bot.findMove(playerMoves.playerTwo);
+            bot.blockPlayer(playerMoves.playerOne);
+            const move = bot.getNxtMove();
+            if(move) {
+                playerMovesDispatcher({ type: 'ADD_PLAYER_MOVES', player: 'playerTwo', moves: playerMoves.playerTwo.concat(move) });
+                setBlocks({ ...blocks, [move]: 'O' });
+                currentPlayerDispatcher({ type: 'SET_CURRENT_PLAYER', currentPlayer: 'playerOne' });
+            }
         }
     };
 
